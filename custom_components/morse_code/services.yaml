@@ -1,0 +1,63 @@
+play:
+  name: Play Morse Code
+  description: Convert text to Morse code and play it by toggling a switch entity.
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The switch entity to toggle for Morse code playback.
+      required: true
+      selector:
+        entity:
+          domain: switch
+    text:
+      name: Text
+      description: The text string to convert to Morse code and play.
+      required: true
+      example: "HELLO"
+      selector:
+        text:
+    dot_duration_ms:
+      name: Dot Duration (ms)
+      description: Duration in milliseconds for a dot signal (ON time).
+      default: 100
+      selector:
+        number:
+          min: 10
+          max: 5000
+          unit_of_measurement: ms
+    dash_duration_ms:
+      name: Dash Duration (ms)
+      description: Duration in milliseconds for a dash signal (ON time).
+      default: 300
+      selector:
+        number:
+          min: 10
+          max: 5000
+          unit_of_measurement: ms
+    symbol_gap_ms:
+      name: Symbol Gap (ms)
+      description: Gap in milliseconds between dots/dashes within a letter.
+      default: 100
+      selector:
+        number:
+          min: 10
+          max: 5000
+          unit_of_measurement: ms
+    letter_gap_ms:
+      name: Letter Gap (ms)
+      description: Gap in milliseconds between letters.
+      default: 300
+      selector:
+        number:
+          min: 10
+          max: 10000
+          unit_of_measurement: ms
+    word_gap_ms:
+      name: Word Gap (ms)
+      description: Gap in milliseconds between words.
+      default: 700
+      selector:
+        number:
+          min: 10
+          max: 20000
+          unit_of_measurement: ms
