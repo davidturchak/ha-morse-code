@@ -6,10 +6,10 @@ Plays text as Morse code by toggling a switch entity ON/OFF.
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 import voluptuous as vol
 
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.typing import ConfigType
@@ -25,11 +25,6 @@ from .const import (
 from .morse_player import MorsePlayer
 
 _LOGGER = logging.getLogger(__name__)
-
-CONFIG_SCHEMA = vol.Schema(
-    {DOMAIN: vol.Schema({})},
-    extra=vol.ALLOW_EXTRA,
-)
 
 SERVICE_PLAY = "play"
 
@@ -57,11 +52,16 @@ SERVICE_PLAY_SCHEMA = vol.Schema(
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up the Morse Code component.
+    """Set up the Morse Code component from YAML (legacy)."""
+    return True
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up Morse Code from a config entry.
 
     Args:
         hass: The Home Assistant instance.
-        config: The component configuration.
+        entry: The config entry.
 
     Returns:
         True if setup was successful.
@@ -108,4 +108,20 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     )
 
     _LOGGER.info("Morse Code component loaded successfully")
+    return True
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload a Morse Code config entry.
+
+    Args:
+        hass: The Home Assistant instance.
+        entry: The config entry.
+
+    Returns:
+        True if unload was successful.
+    """
+    hass.services.async_remove(DOMAIN, SERVICE_PLAY)
+    hass.data.pop(DOMAIN, None)
+    _LOGGER.info("Morse Code component unloaded")
     return True
