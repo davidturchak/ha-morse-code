@@ -1,12 +1,11 @@
 {
   "domain": "morse_code",
   "name": "Morse Code",
-  "codeowners": [
-    "@davidturchak"
-  ],
+  "codeowners": ["@davidturchak"],
+  "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/davidturchak/ha-morse-code",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/davidturchak/ha-morse-code/issues",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
