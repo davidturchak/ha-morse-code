@@ -1,0 +1,14 @@
+{
+  "title": "Morse Code",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Morse Code",
+        "description": "This integration lets you play text as Morse code by toggling a switch entity."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Morse Code is already configured."
+    }
+  }
+}
